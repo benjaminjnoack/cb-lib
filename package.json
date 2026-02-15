@@ -6,33 +6,40 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/benjaminjnoack/cb-lib",
   "type": "module",
-  "bin": {
-    "cb": "./dist/cli.js"
-  },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20"
   },
-  "main": "./dist/cb.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf dist",
-    "dev": "tsx src/cli.ts",
     "lint": "eslint src test eslint.config.mjs vitest.config.ts",
     "lint:fix": "eslint src test eslint.config.mjs vitest.config.ts --fix",
     "pack:dry": "npm pack --dry-run",
-    "prepare": "husky",
+    "prepare": "npm run build",
     "prepack": "npm run clean && npm run build",
     "release:check": "npm run lint && npm run typecheck && npm run test && npm run pack:dry",
-    "smoke:bin": "node dist/cli.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -p tsconfig.json"
   },
   "keywords": [
-    "cli",
+    "coinbase",
+    "trading",
+    "crypto",
+    "library",
     "typescript"
   ],
   "devDependencies": {

@@ -47,7 +47,8 @@ This document describes local setup, development workflow, and quality checks fo
 
 This repository uses Husky + lint-staged.
 
-- `npm install` runs `prepare` and installs hooks.
+- `npm install` runs `prepare`, which builds the library.
+- To enable local git hooks in this repo, run `npx husky`.
 - On commit, staged `*.{ts,tsx,js,mjs,cjs}` files are auto-fixed with `eslint --fix`.
 
 ## CI

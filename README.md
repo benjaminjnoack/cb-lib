@@ -15,6 +15,12 @@
 npm install cb-lib
 ```
 
+Or directly from GitHub while the package is not published to npm:
+
+```bash
+npm install github:benjaminjnoack/cb-lib
+```
+
 ## Configuration
 
 Set the Coinbase credentials file path in your environment:
@@ -24,6 +30,15 @@ HELPER_COINBASE_CREDENTIALS_PATH=/absolute/path/to/coinbase-credentials.json
 ```
 
 A template is available in `.env.example`.
+
+## Basic Usage
+
+```ts
+import { requestAccounts, requestProduct } from "cb-lib";
+
+const accounts = await requestAccounts();
+const product = await requestProduct("BTC-USD");
+```
 
 ## What It Includes
 

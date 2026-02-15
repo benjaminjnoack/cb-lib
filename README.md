@@ -62,10 +62,20 @@ const usd = await cb.rest.requestCurrencyAccount("USD");
 const rounded = toIncrement("0.01", 123.456); // "123.45"
 ```
 
+## API Surface
+
+`cb-lib` exposes the full module surface:
+
+- Grouped namespaces: `rest`, `orders`, `increment`, `cache`, `signing`, `env`, `schemas`
+- Direct named exports for all functions/types from `src/rest.ts`, `src/service/order.ts`, `src/lib/*`, and `src/schemas/*`
+- Default export: `cb`/`coinbase` object with the grouped namespaces above
+
 ## What It Includes
 
 - REST request helpers for Coinbase brokerage endpoints (`src/rest.ts`)
 - Order creation helpers (`src/service/order.ts`)
+- Increment/rounding helpers (`src/lib/increment.ts`)
+- Cache and signing helpers (`src/lib/cache.ts`, `src/lib/signing.ts`)
 - Product helpers (`src/Product.ts`)
 - Transaction summary caching helper (`src/transaction_summary.ts`)
 - Zod schemas for runtime validation (`src/schemas/`)
@@ -78,6 +88,7 @@ npm run lint
 npm run typecheck
 npm run test
 npm run build
+npm run release:check
 ```
 
 ## CI

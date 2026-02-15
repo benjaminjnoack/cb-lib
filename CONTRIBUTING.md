@@ -33,23 +33,27 @@ This document describes local setup, development workflow, and quality checks fo
 - `npm run test:watch` runs tests in watch mode
 - `npm run pack:dry` previews npm package contents
 - `npm run release:check` runs lint + typecheck + test + pack dry run
+- `npm run prepare` builds the library (used for git-based installs)
 
 ## Development Workflow
 
 1. Install dependencies with `npm install`.
 2. Run `npm run typecheck` and `npm run lint` while developing.
 3. Add or update tests in `test/` with each behavior change.
-4. Before opening a PR, run:
-   - `npm run release:check`
-   - `npm run build`
+4. Before opening a PR, run `npm run release:check` and `npm run build`.
 
 ## Pre-commit Hooks
 
 This repository uses Husky + lint-staged.
 
 - `npm install` runs `prepare`, which builds the library.
-- To enable local git hooks in this repo, run `npx husky`.
+- If hooks are not active in your clone, run `npx husky` once to configure git hooks.
 - On commit, staged `*.{ts,tsx,js,mjs,cjs}` files are auto-fixed with `eslint --fix`.
+
+## Packaging Notes
+
+- Published files are controlled by `package.json#files` (`dist`, `README.md`, `LICENSE`).
+- `npm run prepack` performs a clean build before packaging/publish.
 
 ## CI
 

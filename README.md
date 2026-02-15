@@ -52,13 +52,14 @@ Reference: https://docs.cdp.coinbase.com/coinbase-app/authentication-authorizati
 ## Basic Usage
 
 ```ts
-import cb, { orders, rest } from "cb-lib";
+import cb, { orders, rest, toIncrement } from "cb-lib";
 
 const accounts = await rest.requestAccounts();
 const product = await rest.requestProduct("BTC-USD");
 
 const orderId = await orders.createMarketOrder("BTC-USD", "BUY", "0.001");
 const usd = await cb.rest.requestCurrencyAccount("USD");
+const rounded = toIncrement("0.01", 123.456); // "123.45"
 ```
 
 ## What It Includes

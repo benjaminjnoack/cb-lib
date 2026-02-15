@@ -55,6 +55,16 @@ This repository uses Husky + lint-staged.
 - Published files are controlled by `package.json#files` (`dist`, `README.md`, `LICENSE`).
 - `npm run prepack` performs a clean build before packaging/publish.
 
+## Releasing
+
+This repo uses tag-based GitHub Releases.
+
+- Run `npm version patch` (or `minor` / `major`) to bump version and create a `vX.Y.Z` tag.
+- Push commits and tags:
+  - `git push`
+  - `git push --tags`
+- Pushing a `v*` tag triggers `.github/workflows/release.yml`, which creates the GitHub Release automatically.
+
 ## CI
 
 GitHub Actions workflow: `.github/workflows/ci.yml`

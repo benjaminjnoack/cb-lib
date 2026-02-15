@@ -99,6 +99,8 @@ GitHub Actions runs on push to `main` and on pull requests, executing:
 - `npm run release:check`
 - `npm run build`
 
+Tag pushes matching `v*` also trigger automated GitHub Releases.
+
 ## License
 
 Apache-2.0

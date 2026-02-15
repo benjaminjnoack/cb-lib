@@ -31,6 +31,24 @@ HELPER_COINBASE_CREDENTIALS_PATH=/absolute/path/to/coinbase-credentials.json
 
 A template is available in `.env.example`.
 
+### Coinbase CDP API Keys
+
+This library expects Coinbase App API credentials created in the CDP portal.
+
+- Use a CDP Secret API key with the `ECDSA`/`ES256` signature algorithm (not `Ed25519` for Coinbase App API auth).
+- The credentials JSON pointed to by `HELPER_COINBASE_CREDENTIALS_PATH` must match:
+
+```json
+{
+  "name": "organizations/{org_id}/apiKeys/{key_id}",
+  "privateKey": "-----BEGIN EC PRIVATE KEY-----\n...\n-----END EC PRIVATE KEY-----\n"
+}
+```
+
+- Preserve private key newlines exactly (either real multiline PEM or `\n` escaped newlines in a single string).
+
+Reference: https://docs.cdp.coinbase.com/coinbase-app/authentication-authorization/api-key-authentication
+
 ## Basic Usage
 
 ```ts

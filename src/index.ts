@@ -1,10 +1,7 @@
-export { default as Product } from "./Product.js";
-
-export { getCredentials } from "./credentials.js";
-export { getTransactionSummary } from "./transaction_summary.js";
-
-export {
-  http,
+import Product from "./Product.js";
+import { getCredentials } from "./credentials.js";
+import { getTransactionSummary } from "./transaction_summary.js";
+import {
   requestAccounts,
   requestBestBidAsk,
   requestCurrencyAccount,
@@ -16,16 +13,48 @@ export {
   requestOrders,
   requestProduct,
   requestTransactionSummary,
-  requestWithSchema,
 } from "./rest.js";
-
-export {
+import {
   createBracketOrder,
   createLimitOrder,
   createLimitTpSlOrder,
   createMarketOrder,
   createStopLimitOrder,
 } from "./service/order.js";
+
+export { Product, getCredentials, getTransactionSummary };
+
+export const rest = {
+  requestAccounts,
+  requestBestBidAsk,
+  requestCurrencyAccount,
+  requestMarketTrades,
+  requestOpenOrders,
+  requestOrder,
+  requestOrderCancellation,
+  requestOrderCreation,
+  requestOrders,
+  requestProduct,
+  requestTransactionSummary,
+} as const;
+
+export const orders = {
+  createBracketOrder,
+  createLimitOrder,
+  createLimitTpSlOrder,
+  createMarketOrder,
+  createStopLimitOrder,
+} as const;
+
+export const coinbase = {
+  Product,
+  getCredentials,
+  getTransactionSummary,
+  rest,
+  orders,
+} as const;
+
+export default coinbase;
 
 export type { Credentials } from "./schemas/credentials.js";
 export type { Env } from "./schemas/env.js";

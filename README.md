@@ -34,10 +34,13 @@ A template is available in `.env.example`.
 ## Basic Usage
 
 ```ts
-import { requestAccounts, requestProduct } from "cb-lib";
+import cb, { orders, rest } from "cb-lib";
 
-const accounts = await requestAccounts();
-const product = await requestProduct("BTC-USD");
+const accounts = await rest.requestAccounts();
+const product = await rest.requestProduct("BTC-USD");
+
+const orderId = await orders.createMarketOrder("BTC-USD", "BUY", "0.001");
+const usd = await cb.rest.requestCurrencyAccount("USD");
 ```
 
 ## What It Includes

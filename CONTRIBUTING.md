@@ -59,10 +59,11 @@ This repository uses Husky + lint-staged.
 
 This repo uses tag-based GitHub Releases.
 
-- Run `npm version patch` (or `minor` / `major`) to bump version and create a `vX.Y.Z` tag.
-- Push commits and tags:
-  - `git push`
-  - `git push --tags`
+- Use one of:
+  - `npm run patch`
+  - `npm run minor`
+  - `npm run major`
+- Each command runs `release:check`, bumps version with `npm version`, then pushes commits and tags.
 - Pushing a `v*` tag triggers `.github/workflows/release.yml`, which creates the GitHub Release automatically.
 
 ## CI

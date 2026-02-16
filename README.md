@@ -31,6 +31,26 @@ HELPER_COINBASE_CREDENTIALS_PATH=/absolute/path/to/coinbase-credentials.json
 
 A template is available in `.env.example`.
 
+Default env location for helper tooling:
+
+```bash
+~/.config/helper/.env
+```
+
+You can validate environment setup and credentials file parsing with:
+
+```bash
+npm run build
+npm link
+helper-env-check
+```
+
+Optional override:
+
+```bash
+helper-env-check --env-file /absolute/path/to/.env
+```
+
 ### Coinbase CDP API Keys
 
 This library expects Coinbase App API credentials created in the CDP portal.

@@ -16,6 +16,9 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "helper-env-check": "./dist/bin/validate-env.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

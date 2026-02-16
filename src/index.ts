@@ -9,7 +9,7 @@ import * as schemasCredentials from "./schemas/credentials.js";
 import * as schemasEnv from "./schemas/env.js";
 import * as schemasEnums from "./schemas/enums.js";
 import * as schemasOrders from "./schemas/orders.js";
-import * as schemasPrimatives from "./schemas/primatives.js";
+import * as schemasPrimitives from "./schemas/primitives.js";
 import * as schemasRest from "./schemas/rest.js";
 import { getCredentials } from "./credentials.js";
 import { getTransactionSummary } from "./transaction_summary.js";
@@ -27,7 +27,7 @@ export const schemas = {
   env: schemasEnv,
   enums: schemasEnums,
   orders: schemasOrders,
-  primatives: schemasPrimatives,
+  primitives: schemasPrimitives,
   rest: schemasRest,
 } as const;
 
@@ -62,6 +62,7 @@ export * from "./schemas/credentials.js";
 export * from "./schemas/env.js";
 export * from "./schemas/enums.js";
 export * from "./schemas/orders.js";
-export * from "./schemas/primatives.js";
+export * from "./schemas/primitives.js";
 export * from "./schemas/rest.js";
 export * from "./log/logger.js"
+export * from "./log/orders.js"

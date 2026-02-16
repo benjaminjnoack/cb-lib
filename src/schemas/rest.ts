@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { NumericString } from "./primatives.js";
+import { NumericString } from "./primitives.js";
 import { AccountType, OrderSideSchema } from "./enums.js"
 import { CoinbaseOrderSchema, OrderConfigurationSchema } from "./orders.js";
 

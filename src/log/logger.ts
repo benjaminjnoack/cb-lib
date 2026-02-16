@@ -1,6 +1,5 @@
 import { env } from "cb-lib";
-
-type LogLevel = "debug" | "info" | "warn" | "error";
+import { LOG_LEVELS, type LogLevel } from "../schemas/logger.js";
 
 const LEVEL_PRIORITY: Record<LogLevel, number> = {
   debug: 10,
@@ -11,10 +10,10 @@ const LEVEL_PRIORITY: Record<LogLevel, number> = {
 
 function getConfiguredLevel(): LogLevel {
   const configured = env.env().HELPER_LOG_LEVEL;
-  if (configured === "debug" || configured === "info" || configured === "warn" || configured === "error") {
+  if (configured === LOG_LEVELS.debug || configured === LOG_LEVELS.info || configured === LOG_LEVELS.warn || configured === LOG_LEVELS.error) {
     return configured;
   }
-  return "info";
+  return LOG_LEVELS.info;
 }
 
 function isEnabled(level: LogLevel): boolean {
@@ -24,27 +23,27 @@ function isEnabled(level: LogLevel): boolean {
 
 export const logger = {
   debug: (...args: unknown[]): void => {
-    if (isEnabled("debug")) {
+    if (isEnabled(LOG_LEVELS.debug)) {
       console.debug(...args);
     }
   },
   info: (...args: unknown[]): void => {
-    if (isEnabled("info")) {
+    if (isEnabled(LOG_LEVELS.info)) {
       console.info(...args);
     }
   },
   log: (...args: unknown[]): void => {
-    if (isEnabled("info")) {
+    if (isEnabled(LOG_LEVELS.info)) {
       console.info(...args);
     }
   },
   warn: (...args: unknown[]): void => {
-    if (isEnabled("warn")) {
+    if (isEnabled(LOG_LEVELS.warn)) {
       console.warn(...args);
     }
   },
   error: (...args: unknown[]): void => {
-    if (isEnabled("error")) {
+    if (isEnabled(LOG_LEVELS.error)) {
       console.error(...args);
     }
   },

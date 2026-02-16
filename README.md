@@ -23,18 +23,25 @@ npm install github:benjaminjnoack/cb-lib
 
 ## Configuration
 
-Set the Coinbase credentials file path in your environment:
+A template is available in `.env.example`.
+
+`cb-lib` loads environment variables from an env file in this order:
+
+1. Explicit path passed by tooling (for example `helper-env-check --env-file <path>`)
+2. `HELPER_ENV_FILE`
+3. Default path: `$XDG_CONFIG_HOME/helper/.env` (or `~/.config/helper/.env` if `XDG_CONFIG_HOME` is unset)
+
+Set the Coinbase credentials file path in that env file:
 
 ```bash
 HELPER_COINBASE_CREDENTIALS_PATH=/absolute/path/to/coinbase-credentials.json
 ```
 
-A template is available in `.env.example`.
-
-Default env location for helper tooling:
+Example setup using the default location:
 
 ```bash
-~/.config/helper/.env
+mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/helper"
+cp .env.example "${XDG_CONFIG_HOME:-$HOME/.config}/helper/.env"
 ```
 
 You can validate environment setup and credentials file parsing with:

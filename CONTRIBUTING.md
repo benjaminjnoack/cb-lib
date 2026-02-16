@@ -9,9 +9,11 @@ This document describes local setup, development workflow, and quality checks fo
 
 ## Environment Setup
 
-1. Copy `.env.example` to `.env`.
-2. Set `HELPER_COINBASE_CREDENTIALS_PATH` to your local Coinbase credentials JSON path.
-3. Never commit real secrets or credential files.
+1. Create the default env directory: `${XDG_CONFIG_HOME:-$HOME/.config}/helper`.
+2. Copy `.env.example` to `${XDG_CONFIG_HOME:-$HOME/.config}/helper/.env`.
+3. Set `HELPER_COINBASE_CREDENTIALS_PATH` to your local Coinbase credentials JSON path.
+4. Optional: set `HELPER_ENV_FILE` if you want to use a non-default env file path.
+5. Never commit real secrets or credential files.
 
 ## Project Structure
 

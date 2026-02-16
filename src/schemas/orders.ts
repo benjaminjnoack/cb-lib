@@ -29,6 +29,15 @@ export const BracketOrderConfigurationSchema = z
   })
   .loose();
 
+export const TpSlAttachedOrderConfigurationSchema = z
+  .object({
+    trigger_bracket_gtc: z.object({
+      limit_price: NumericString,
+      stop_trigger_price: NumericString,
+    }),
+  })
+  .loose();
+
 export const StopLimitOrderConfigurationSchema = z
   .object({
     stop_limit_stop_limit_gtc: z.object({
@@ -72,7 +81,7 @@ export const CoinbaseBracketOrderSchema = CoinbaseOrderBaseSchema.extend({
 export const CoinbaseLimitOrderSchema = CoinbaseOrderBaseSchema.extend({
   order_type: z.literal(ORDER_TYPES.LIMIT),
   order_configuration: LimitOrderConfigurationSchema,
-  attached_order_configuration: BracketOrderConfigurationSchema.optional()
+  attached_order_configuration: TpSlAttachedOrderConfigurationSchema.optional()
 });
 
 export const CoinbaseStopLimitOrderSchema = CoinbaseOrderBaseSchema.extend({

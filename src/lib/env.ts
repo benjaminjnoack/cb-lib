@@ -15,7 +15,6 @@ function loadDotenv(explicitPath?: string) {
   if (didLoadDotenv) {return;}
 
   const envPath = explicitPath ?? process.env.HELPER_ENV_FILE ?? defaultEnvPath();
-  console.log("env path: " + envPath);
   dotenv.config({ path: envPath, quiet: true });
 
   didLoadDotenv = true;

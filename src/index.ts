@@ -15,10 +15,11 @@ import { getCredentials } from "./credentials.js";
 import { getTransactionSummary } from "./transaction_summary.js";
 import delay from "./lib/delay.js";
 import { printError } from "./lib/error.js";
+import { logger } from "./log/logger.js";
 
 export { Product, getCredentials, getTransactionSummary, delay, printError };
 
-export { rest, orders, increment, cache, signing, env };
+export { rest, orders, increment, cache, signing, env, logger };
 
 export const schemas = {
   credentials: schemasCredentials,
@@ -61,3 +62,4 @@ export * from "./schemas/enums.js";
 export * from "./schemas/orders.js";
 export * from "./schemas/primatives.js";
 export * from "./schemas/rest.js";
+export * from "./log/logger.js"

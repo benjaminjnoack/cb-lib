@@ -27,6 +27,7 @@ import {
   type TransactionSummary,
   TransactionSummaryResponseSchema,
 } from "./schemas/rest.js";
+import { logger } from "./log/logger.js";
 
 const HOST = "https://api.coinbase.com";
 const MAX_RETRIES = 5;
@@ -88,17 +89,17 @@ export async function requestWithSchema<S extends ZodType>(
         const ax = e as AxiosError;
         const status = ax.response?.status;
         const data = ax.response?.data;
-        console.error(
+        logger.error(
           `[HTTP] ${config.method} ${config.url} -> ${status ?? "ERR"} ${
             typeof data === "string" ? data : JSON.stringify(data)
           }`,
         );
       } else if (e instanceof z.ZodError) {
         // Schema mismatch is permanent—no point retrying more times
-        console.error("[HTTP] Response validation failed:", e.message);
+        logger.error("[HTTP] Response validation failed:", e.message);
         throw e;
       } else {
-        console.error(`[HTTP] ${config.method} ${config.url} failed:`, String(e));
+        logger.error(`[HTTP] ${config.method} ${config.url} failed:`, String(e));
       }
 
       if (attempt < maxRetries) {
@@ -175,16 +176,15 @@ export async function requestOrderCancellation(order_id: string) {
   if (parsed.results) {
     const result = parsed.results.find((r) => r.order_id === order_id);
     if (!result) {
-      console.dir(parsed);
       throw new Error(`Order ID ${order_id} not found in response`);
     }
   }
 
   if (parsed.success) {
-    console.info(`Order ${order_id} canceled successfully.`);
+    logger.info(`Order ${order_id} canceled successfully.`);
     return true;
   } else {
-    console.error(`Cancel failed: ${parsed.failure_reason || "Unknown reason"}`);
+    logger.error(`Cancel failed: ${parsed.failure_reason || "Unknown reason"}`);
     return false;
   }
 }

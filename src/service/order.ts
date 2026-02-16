@@ -2,13 +2,14 @@ import * as uuid from "uuid";
 import { requestOrderCreation } from "../rest.js";
 import { ORDER_SIDE, type OrderSide } from "../schemas/enums.js";
 import type { OrderRequest } from "../schemas/rest.js";
+import { logger } from "../log/logger.js";
 
 export async function createMarketOrder(
   productId: string,
   side: OrderSide,
   baseSize: string,
 ): Promise<string> {
-  console.info(`createMarketOrder => ${side} ${baseSize} ${productId}`);
+  logger.info(`createMarketOrder => ${side} ${baseSize} ${productId}`);
   const order: OrderRequest = {
     client_order_id: uuid.v4(),
     product_id: productId,
@@ -21,7 +22,7 @@ export async function createMarketOrder(
   };
 
   const orderId = await requestOrderCreation(order);
-  console.info(`createMarketOrder => ${orderId}`);
+  logger.info(`createMarketOrder => ${orderId}`);
   return orderId;
 }
 
@@ -31,7 +32,7 @@ export async function createLimitOrder(
   baseSize: string,
   limitPrice: string,
 ): Promise<string> {
-  console.info(`createLimitOrder => ${side} ${baseSize} ${productId} @ ${limitPrice}`);
+  logger.info(`createLimitOrder => ${side} ${baseSize} ${productId} @ ${limitPrice}`);
   const order = {
     client_order_id: uuid.v4(),
     product_id: productId,
@@ -45,7 +46,7 @@ export async function createLimitOrder(
   };
 
   const orderId = await requestOrderCreation(order);
-  console.info(`createLimitOrder => ${orderId}`);
+  logger.info(`createLimitOrder => ${orderId}`);
   return orderId;
 }
 
@@ -56,7 +57,7 @@ export async function createLimitTpSlOrder(
   stopPrice: string,
   takeProfitPrice: string,
 ): Promise<string> {
-  console.info(
+  logger.info(
     `createLimitTpSlOrder => ${ORDER_SIDE.BUY} ${baseSize} ${productId} @ ${limitPrice} => ${takeProfitPrice}/${stopPrice}`,
   );
   const order = {
@@ -77,7 +78,7 @@ export async function createLimitTpSlOrder(
     },
   };
   const orderId = await requestOrderCreation(order);
-  console.info(`createLimitOrder => ${orderId}`);
+  logger.info(`createLimitOrder => ${orderId}`);
   return orderId;
 }
 
@@ -88,7 +89,7 @@ export async function createBracketOrder(
   limitPrice: string,
   stopPrice: string,
 ): Promise<string> {
-  console.info(`createBracketOrder => ${baseSize} ${productId} @ ${stopPrice}/${limitPrice}`);
+  logger.info(`createBracketOrder => ${baseSize} ${productId} @ ${stopPrice}/${limitPrice}`);
   const order = {
     client_order_id: uuid.v4(),
     product_id: productId,
@@ -103,7 +104,7 @@ export async function createBracketOrder(
   };
 
   const orderId = await requestOrderCreation(order);
-  console.info(`createBracketOrder => ${orderId}`);
+  logger.info(`createBracketOrder => ${orderId}`);
   return orderId;
 }
 
@@ -114,7 +115,7 @@ export async function createStopLimitOrder(
   limitPrice: string,
   stopPrice: string,
 ): Promise<string> {
-  console.info(`createStopLimitOrder => ${baseSize} ${productId} @ ${stopPrice}/${limitPrice}`);
+  logger.info(`createStopLimitOrder => ${baseSize} ${productId} @ ${stopPrice}/${limitPrice}`);
   const order = {
     client_order_id: uuid.v4(),
     product_id: productId,
@@ -130,6 +131,6 @@ export async function createStopLimitOrder(
   };
 
   const orderId = await requestOrderCreation(order);
-  console.info(`createStopLimitOrder => ${orderId}`);
+  logger.info(`createStopLimitOrder => ${orderId}`);
   return orderId;
 }

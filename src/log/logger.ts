@@ -33,6 +33,11 @@ export const logger = {
       console.info(...args);
     }
   },
+  log: (...args: unknown[]): void => {
+    if (isEnabled("info")) {
+      console.info(...args);
+    }
+  },
   warn: (...args: unknown[]): void => {
     if (isEnabled("warn")) {
       console.warn(...args);

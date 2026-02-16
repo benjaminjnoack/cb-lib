@@ -2,6 +2,7 @@ import { requestProduct } from "./rest.js";
 import { loadProduct, saveProduct } from "./lib/cache.js";
 import { type CoinbaseProduct } from "./schemas/rest.js";
 import { printError } from "./lib/error.js";
+import { logger } from "./log/logger.js";
 
 class Product {
   product_id: string;
@@ -37,16 +38,16 @@ class Product {
     let data: CoinbaseProduct;
 
     if (forceUpdate) {
-      console.info(`getProductInfo => Force update for ${productId}`);
+      logger.info(`getProductInfo => Force update for ${productId}`);
       data = await requestProduct(productId);
       saveProduct(productId, data);
     } else {
       try {
         data = loadProduct(productId);
-        console.debug(`getProductInfo => Cache hit for ${productId}`);
+        logger.debug(`getProductInfo => Cache hit for ${productId}`);
       } catch (e) {
         printError(e);
-        console.warn(`getProductInfo => Cache miss for ${productId}, fetching from Coinbase...`);
+        logger.warn(`getProductInfo => Cache miss for ${productId}, fetching from Coinbase...`);
         data = await requestProduct(productId);
         saveProduct(productId, data);
       }
@@ -76,7 +77,7 @@ class Product {
   static ensureProduct(product: string): string {
     const DEFAULT_PRODUCT = "btc";
     if (!product) {
-      console.warn(`Defaulting to ${DEFAULT_PRODUCT}`);
+      logger.warn(`Defaulting to ${DEFAULT_PRODUCT}`);
       product = DEFAULT_PRODUCT;
     }
     return product;

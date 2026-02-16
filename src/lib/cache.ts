@@ -6,6 +6,7 @@ import {
   type CoinbaseProduct,
   CoinbaseProductSchema,
 } from "../schemas/rest.js";
+import { logger } from "../log/logger.js";
 
 const paths = envPaths("helper");
 export const cacheDir = paths.cache;
@@ -21,17 +22,17 @@ mkdirSync(coinbaseDir, { recursive: true });
 
 export function loadJsonFromCache(cachePath: string): unknown {
   if (existsSync(cachePath)) {
-    console.debug(`Cache hit for ${cachePath}`);
+    logger.debug(`Cache hit for ${cachePath}`);
     return JSON.parse(readFileSync(cachePath, "utf8"));
   }
-  console.debug(`Cache miss for ${cachePath}`);
+  logger.debug(`Cache miss for ${cachePath}`);
   return null; // Cache miss
 }
 
 function saveJsonToCache(cachePath: string, data: object): void {
   mkdirSync(path.dirname(cachePath), { recursive: true });
   writeFileSync(cachePath, JSON.stringify(data, null, 2));
-  console.debug(`Cache saved for ${cachePath}`);
+  logger.debug(`Cache saved for ${cachePath}`);
 }
 
 export function loadCoinbase(name: string) {
@@ -74,10 +75,10 @@ export async function saveCoinbase(
       const twentyFourHours = 24 * 60 * 60 * 1000;
 
       if (now - mtime <= twentyFourHours) {
-        console.debug(`saveCoinbase => ${name} cache is fresh; skipping write`);
+        logger.debug(`saveCoinbase => ${name} cache is fresh; skipping write`);
         return false;
       }
-      console.warn(`saveCoinbase => ${name} cache is stale; refreshing`);
+      logger.warn(`saveCoinbase => ${name} cache is stale; refreshing`);
     } catch (err) {
       if (err instanceof Error) {
         if (isNodeErrno(err) && err.code !== "ENOENT") {

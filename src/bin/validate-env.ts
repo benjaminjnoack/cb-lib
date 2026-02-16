@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { getCredentials } from "../credentials.js";
 import { env, primeEnv } from "../lib/env.js";
+import { logger } from "../log/logger.js";
 
 type Args = {
   envFilePath?: string;
@@ -44,14 +45,14 @@ function defaultEnvPath(): string {
 }
 
 function printHelp(): void {
-  console.log("Validate helper environment and Coinbase credentials.");
-  console.log("");
-  console.log("Usage:");
-  console.log("  helper-env-check [--env-file <path>]");
-  console.log("");
-  console.log("Options:");
-  console.log("  --env-file <path>  Override env file path");
-  console.log("  -h, --help         Show this help message");
+  logger.log("Validate helper environment and Coinbase credentials.");
+  logger.log("");
+  logger.log("Usage:");
+  logger.log("  helper-env-check [--env-file <path>]");
+  logger.log("");
+  logger.log("Options:");
+  logger.log("  --env-file <path>  Override env file path");
+  logger.log("  -h, --help         Show this help message");
 }
 
 async function run(): Promise<void> {
@@ -64,13 +65,13 @@ async function run(): Promise<void> {
   const loadedEnv = env();
   await getCredentials();
 
-  console.log("Environment configuration is valid.");
-  console.log(`Env file: ${resolvedEnvPath}`);
-  console.log(`Credentials file: ${loadedEnv.HELPER_COINBASE_CREDENTIALS_PATH}`);
+  logger.log("Environment configuration is valid.");
+  logger.log(`Env file: ${resolvedEnvPath}`);
+  logger.log(`Credentials file: ${loadedEnv.HELPER_COINBASE_CREDENTIALS_PATH}`);
 }
 
 run().catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
-  console.error(`Environment validation failed: ${message}`);
+  logger.error(`Environment validation failed: ${message}`);
   process.exit(1);
 });

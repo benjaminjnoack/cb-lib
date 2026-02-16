@@ -1,11 +1,12 @@
 import { z, ZodError } from "zod";
+import { logger } from "../log/logger.js";
 
 export function printError(e: unknown) {
   if (e instanceof ZodError) {
-    console.error(z.formatError(e));
+    logger.error(z.formatError(e));
   } else if (e instanceof Error) {
-    console.error(e.message);
+    logger.error(e.message);
   } else {
-    console.error(e);
+    logger.error(e);
   }
 }

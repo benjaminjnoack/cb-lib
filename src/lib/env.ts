@@ -1,17 +1,21 @@
 import dotenv from "dotenv";
+import os from "node:os";
+import path from "node:path";
 import { type Env, EnvSchema } from "../schemas/env.js";
 
 let didLoadDotenv = false;
 let cachedEnv: Env | null = null;
 
+function defaultEnvPath(): string {
+  const configHome = process.env.XDG_CONFIG_HOME ?? path.join(os.homedir(), ".config");
+  return path.join(configHome, "helper", ".env");
+}
+
 function loadDotenv(explicitPath?: string) {
   if (didLoadDotenv) {return;}
 
-  if (explicitPath) {
-    dotenv.config({ path: explicitPath, quiet: true });
-  } else {
-    dotenv.config();
-  }
+  const envPath = explicitPath ?? process.env.HELPER_ENV_FILE ?? defaultEnvPath();
+  dotenv.config({ path: envPath, quiet: true });
 
   didLoadDotenv = true;
 }

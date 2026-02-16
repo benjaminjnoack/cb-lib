@@ -16,6 +16,7 @@ import { getTransactionSummary } from "./transaction_summary.js";
 import delay from "./lib/delay.js";
 import { printError } from "./lib/error.js";
 import { logger } from "./log/logger.js";
+import { printOrder } from "./log/orders.js"
 
 export { Product, getCredentials, getTransactionSummary, delay, printError };
 
@@ -36,6 +37,7 @@ export const coinbase = {
   getTransactionSummary,
   delay,
   printError,
+  printOrder,
   rest,
   orders,
   increment,

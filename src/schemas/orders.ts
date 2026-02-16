@@ -81,7 +81,7 @@ export const CoinbaseBracketOrderSchema = CoinbaseOrderBaseSchema.extend({
 export const CoinbaseLimitOrderSchema = CoinbaseOrderBaseSchema.extend({
   order_type: z.literal(ORDER_TYPES.LIMIT),
   order_configuration: LimitOrderConfigurationSchema,
-  attached_order_configuration: TpSlAttachedOrderConfigurationSchema.optional()
+  attached_order_configuration: TpSlAttachedOrderConfigurationSchema.nullish()
 });
 
 export const CoinbaseStopLimitOrderSchema = CoinbaseOrderBaseSchema.extend({

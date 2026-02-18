@@ -26,7 +26,7 @@ export function primeEnv(explicitPath?: string): void {
   cachedEnv = EnvSchema.parse(process.env);
 }
 
-export function env(): Env {
+export function getEnvConfig(): Env {
   if (!cachedEnv) {
     primeEnv();
   }

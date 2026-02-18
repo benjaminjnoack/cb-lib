@@ -1,5 +1,5 @@
 import { promises } from "node:fs";
-import { env } from "./lib/env.js";
+import { getEnvConfig } from "./lib/env.js";
 import { type Credentials, CredentialsSchema } from "./schemas/credentials.js";
 import { logger } from "./log/logger.js";
 
@@ -11,7 +11,7 @@ let credentials: Credentials | null = null;
  */
 export async function getCredentials(): Promise<Credentials> {
   if (!credentials) {
-    const { HELPER_COINBASE_CREDENTIALS_PATH } = env();
+    const { HELPER_COINBASE_CREDENTIALS_PATH } = getEnvConfig();
     logger.debug(`loading credentials from ${HELPER_COINBASE_CREDENTIALS_PATH}`);
     const keyData = await promises.readFile(HELPER_COINBASE_CREDENTIALS_PATH, "utf8");
 

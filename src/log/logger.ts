@@ -1,5 +1,5 @@
-import { env } from "cb-lib";
 import { LOG_LEVELS, type LogLevel } from "../schemas/logger.js";
+import { getEnvConfig } from "../lib/env.js";
 
 const LEVEL_PRIORITY: Record<LogLevel, number> = {
   debug: 10,
@@ -9,7 +9,7 @@ const LEVEL_PRIORITY: Record<LogLevel, number> = {
 };
 
 function getConfiguredLevel(): LogLevel {
-  const configured = env.env().HELPER_LOG_LEVEL;
+  const configured = getEnvConfig().HELPER_LOG_LEVEL;
   if (configured === LOG_LEVELS.debug || configured === LOG_LEVELS.info || configured === LOG_LEVELS.warn || configured === LOG_LEVELS.error) {
     return configured;
   }

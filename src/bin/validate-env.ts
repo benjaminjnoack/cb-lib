@@ -4,7 +4,7 @@ import { access } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { getCredentials } from "../credentials.js";
-import { env, primeEnv } from "../lib/env.js";
+import { getEnvConfig, primeEnv } from "../lib/env.js";
 import { logger } from "../log/logger.js";
 
 type Args = {
@@ -62,7 +62,7 @@ async function run(): Promise<void> {
   await access(resolvedEnvPath);
 
   primeEnv(envFilePath);
-  const loadedEnv = env();
+  const loadedEnv = getEnvConfig();
   await getCredentials();
 
   logger.log("Environment configuration is valid.");

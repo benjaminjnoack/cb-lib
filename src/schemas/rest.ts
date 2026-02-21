@@ -56,6 +56,8 @@ export const FeeTierSchema = z
 
 export const BatchCancelResultSchema = z
   .object({
+    success: z.boolean(),
+    failure_reason: z.string(),
     order_id: z.uuid(),
   })
   .loose();
@@ -119,11 +121,8 @@ export type OrderHistoricalBatchResponse = z.infer<typeof OrdersHistoricalBatchR
 
 export const OrdersBatchCancelResponseSchema = z
   .object({
-    success: z.boolean(),
-    results: z.array(BatchCancelResultSchema).optional(),
-    failure_reason: z.string().optional(),
-  })
-  .loose();
+    results: z.array(BatchCancelResultSchema)
+  });
 
 export const TickerResponseSchema = z
   .object({

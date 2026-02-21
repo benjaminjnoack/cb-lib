@@ -173,20 +173,17 @@ export async function requestOrderCancellation(order_id: string) {
 
   const config = await getConfig("POST", request_path, null, data);
   const parsed = await requestWithSchema(config, OrdersBatchCancelResponseSchema);
-  if (parsed.results) {
-    const result = parsed.results.find((r) => r.order_id === order_id);
-    if (!result) {
-      throw new Error(`Order ID ${order_id} not found in response`);
-    }
+  const result = parsed.results.find((r) => r.order_id === order_id);
+  if (!result) {
+    throw new Error(`Order ID ${order_id} not found in response`);
   }
 
-  if (parsed.success) {
+  if (result.success) {
     logger.info(`Order ${order_id} canceled successfully.`);
     return true;
-  } else {
-    logger.error(`Cancel failed: ${parsed.failure_reason || "Unknown reason"}`);
-    return false;
   }
+
+  throw new Error(`Cancel failed: ${result.failure_reason || "Unknown reason"}`);
 }
 
 export async function requestOpenOrders(

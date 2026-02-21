@@ -35,3 +35,17 @@ export const OrderTypeSchema = z.enum([
 ]);
 export const ORDER_TYPES = OrderTypeSchema.enum;
 
+// This is the pattern to follow
+export const OrderPlacementSource = {
+  UNKNOWN: "UNKNOWN_PLACEMENT_SOURCE",
+  SIMPLE: "RETAIL_SIMPLE",
+  ADVANCED: "RETAIL_ADVANCED",
+} as const;
+
+export type OrderPlacementValue = (typeof OrderPlacementSource)[keyof typeof OrderPlacementSource];
+export const OrderPlacementValues = [
+  OrderPlacementSource.UNKNOWN,
+  OrderPlacementSource.SIMPLE,
+  OrderPlacementSource.ADVANCED,
+];
+export const OrderPlacementSchema = z.enum(OrderPlacementValues);

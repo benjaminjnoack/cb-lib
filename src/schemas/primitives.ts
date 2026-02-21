@@ -16,7 +16,7 @@ export const ProductSchema = z
   .string()
   .trim()
   .min(1)
-  .default("BTC-USD")
+  .default("BTC")
   .transform((value) => value.toUpperCase())
   .refine((value) => /^[A-Z0-9]+(?:-USD)?$/.test(value), {
     message: "Product must be TOKEN or TOKEN-USD.",

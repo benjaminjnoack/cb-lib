@@ -31,8 +31,9 @@ export async function createLimitOrder(
   side: OrderSide,
   baseSize: string,
   limitPrice: string,
+  postOnly: boolean = true,
 ): Promise<string> {
-  logger.info(`createLimitOrder => ${side} ${baseSize} ${productId} @ ${limitPrice}`);
+  logger.info(`createLimitOrder => ${side} ${baseSize} ${productId} @ ${limitPrice} (postOnly=${postOnly})`);
   const order = {
     client_order_id: uuid.v4(),
     product_id: productId,
@@ -41,6 +42,7 @@ export async function createLimitOrder(
       limit_limit_gtc: {
         base_size: baseSize,
         limit_price: limitPrice,
+        post_only: postOnly,
       },
     },
   };
@@ -56,9 +58,10 @@ export async function createLimitTpSlOrder(
   limitPrice: string,
   stopPrice: string,
   takeProfitPrice: string,
+  postOnly: boolean = true,
 ): Promise<string> {
   logger.info(
-    `createLimitTpSlOrder => ${ORDER_SIDE.BUY} ${baseSize} ${productId} @ ${limitPrice} => ${takeProfitPrice}/${stopPrice}`,
+    `createLimitTpSlOrder => ${ORDER_SIDE.BUY} ${baseSize} ${productId} @ ${limitPrice} => ${takeProfitPrice}/${stopPrice} (postOnly=${postOnly})`,
   );
   const order = {
     client_order_id: uuid.v4(),
@@ -68,6 +71,7 @@ export async function createLimitTpSlOrder(
       limit_limit_gtc: {
         base_size: baseSize,
         limit_price: limitPrice,
+        post_only: postOnly,
       },
     },
     attached_order_configuration: {

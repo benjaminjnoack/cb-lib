@@ -7,6 +7,7 @@ export const LimitOrderConfigurationSchema = z
     limit_limit_gtc: z.object({
       base_size: NumericString,
       limit_price: NumericString,
+      post_only: z.boolean().default(true),
     }),
   })
   .loose();

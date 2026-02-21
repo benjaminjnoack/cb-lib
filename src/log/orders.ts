@@ -26,7 +26,7 @@ const ORDER_FIELDS = [
 
 const ORDER_CONFIGURATION_FIELDS: Record<CoinbaseOrder["order_type"], readonly string[]> = {
   BRACKET: ["base_size", "limit_price", "stop_trigger_price"],
-  LIMIT: ["base_size", "limit_price"],
+  LIMIT: ["base_size", "limit_price", "post_only"],
   MARKET: ["base_size"],
   STOP_LIMIT: ["base_size", "limit_price", "stop_direction", "stop_price"],
 };

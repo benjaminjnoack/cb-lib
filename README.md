@@ -15,7 +15,7 @@
 npm install cb-lib
 ```
 
-Or directly from GitHub while the package is not published to npm:
+Or install directly from GitHub:
 
 ```bash
 npm install github:benjaminjnoack/cb-lib
@@ -79,23 +79,34 @@ Reference: https://docs.cdp.coinbase.com/coinbase-app/authentication-authorizati
 ## Basic Usage
 
 ```ts
-import cb, { orders, rest, toIncrement } from "cb-lib";
+import {
+  createMarketOrder,
+  requestAccounts,
+  requestCurrencyAccount,
+  requestProduct,
+  toIncrement,
+} from "cb-lib";
 
-const accounts = await rest.requestAccounts();
-const product = await rest.requestProduct("BTC-USD");
+const accounts = await requestAccounts();
+const product = await requestProduct("BTC-USD");
 
-const orderId = await orders.createMarketOrder("BTC-USD", "BUY", "0.001");
-const usd = await cb.rest.requestCurrencyAccount("USD");
+const orderId = await createMarketOrder("BTC-USD", "BUY", "0.001");
+const usd = await requestCurrencyAccount("USD");
 const rounded = toIncrement("0.01", 123.456); // "123.45"
 ```
 
 ## API Surface
 
-`cb-lib` exposes the full module surface:
+`cb-lib` uses named exports from `src/index.ts`:
 
-- Grouped namespaces: `rest`, `orders`, `increment`, `cache`, `signing`, `env`, `schemas`
-- Direct named exports for all functions/types from `src/rest.ts`, `src/service/order.ts`, `src/lib/*`, and `src/schemas/*`
-- Default export: `cb`/`coinbase` object with the grouped namespaces above
+- REST helpers from `src/rest.ts` (for example `requestAccounts`, `requestProduct`)
+- Order helpers from `src/service/order.ts` (for example `createMarketOrder`, `createLimitOrder`)
+- Utilities from `src/lib/*` (for example `toIncrement`, `getEnvConfig`, `delay`, signing/cache/error helpers)
+- Credentials and logging helpers from `src/credentials.ts` and `src/log/*`
+- Schemas/types from `src/schemas/*`
+- `Product` class as a named export (`Product`)
+
+There is no default export.
 
 ## What It Includes
 
@@ -103,6 +114,8 @@ const rounded = toIncrement("0.01", 123.456); // "123.45"
 - Order creation helpers (`src/service/order.ts`)
 - Increment/rounding helpers (`src/lib/increment.ts`)
 - Cache and signing helpers (`src/lib/cache.ts`, `src/lib/signing.ts`)
+- Credentials loading helper (`src/credentials.ts`)
+- Logging helpers (`src/log/logger.ts`, `src/log/orders.ts`)
 - Product helpers (`src/Product.ts`)
 - Transaction summary caching helper (`src/transaction_summary.ts`)
 - Zod schemas for runtime validation (`src/schemas/`)

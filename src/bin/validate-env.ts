@@ -3,8 +3,8 @@
 import { access } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { getCredentials } from "../lib/credentials.js";
-import { getEnvConfig, primeEnv } from "../lib/env.js";
+import { getCredentials } from "../common/credentials.js";
+import { getEnvConfig, primeEnv } from "../common/env.js";
 import { logger } from "../log/logger.js";
 
 type Args = {

@@ -6,9 +6,9 @@ import axios, {
   type Method,
 } from "axios";
 import { ORDER_STATUS } from "../schemas/enums.js";
-import { toIncrement } from "./increment.js";
+import { toIncrement } from "../common/increment.js";
 import { z, type ZodType } from "zod";
-import delay from "./delay.js";
+import delay from "../common/delay.js";
 import { type CoinbaseOrder } from "../schemas/orders.js"
 import {
   AccountsResponseSchema,

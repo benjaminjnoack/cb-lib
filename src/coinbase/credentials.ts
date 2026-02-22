@@ -1,5 +1,5 @@
 import { promises } from "node:fs";
-import { getEnvConfig } from "./env.js";
+import { getEnvConfig } from "../common/env.js";
 import { type Credentials, CredentialsSchema } from "../schemas/credentials.js";
 import { logger } from "../log/logger.js";
 

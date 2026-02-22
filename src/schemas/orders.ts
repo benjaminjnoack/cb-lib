@@ -14,9 +14,14 @@ export const LimitOrderConfigurationSchema = z
 
 export const MarketOrderConfigurationSchema = z
   .object({
-    market_market_ioc: z.object({
-      base_size: NumericString,
-    }),
+    market_market_ioc: z
+      .object({
+        base_size: NumericString.optional(),
+        quote_size: NumericString.optional(),
+      })
+      .refine((value) => value.base_size !== undefined || value.quote_size !== undefined, {
+        message: "market_market_ioc requires base_size or quote_size",
+      }),
   })
   .loose();
 

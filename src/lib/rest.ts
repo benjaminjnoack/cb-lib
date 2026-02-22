@@ -1,15 +1,15 @@
-import { getSigningKeys, hasSigningKeys, signUrl } from "./lib/signing.js";
+import { getSigningKeys, hasSigningKeys, signUrl } from "./signing.js";
 import axios, {
   type AxiosError,
   type AxiosInstance,
   type AxiosRequestConfig,
   type Method,
 } from "axios";
-import { ORDER_STATUS } from "./schemas/enums.js";
-import { toIncrement } from "./lib/increment.js";
+import { ORDER_STATUS } from "../schemas/enums.js";
+import { toIncrement } from "./increment.js";
 import { z, type ZodType } from "zod";
-import delay from "./lib/delay.js";
-import { type CoinbaseOrder } from "./schemas/orders.js"
+import delay from "./delay.js";
+import { type CoinbaseOrder } from "../schemas/orders.js"
 import {
   AccountsResponseSchema,
   BestBidAskResponseSchema,
@@ -26,8 +26,8 @@ import {
   TickerResponseSchema,
   type TransactionSummary,
   TransactionSummaryResponseSchema,
-} from "./schemas/rest.js";
-import { logger } from "./log/logger.js";
+} from "../schemas/rest.js";
+import { logger } from "../log/logger.js";
 
 const HOST = "https://api.coinbase.com";
 const MAX_RETRIES = 5;

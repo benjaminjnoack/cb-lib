@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { requestOrders } from "../rest.js";
+import { requestOrders } from "../lib/rest.js";
 import { ORDER_STATUS, OrderPlacementSource } from "../schemas/enums.js";
 
 /**

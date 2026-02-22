@@ -1,5 +1,5 @@
 import { z, ZodError } from "zod";
-import { logger } from "../log/logger.js";
+import { logger } from "./logger.js";
 
 export function printError(e: unknown) {
   if (e instanceof ZodError) {

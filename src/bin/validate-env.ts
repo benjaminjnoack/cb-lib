@@ -3,7 +3,7 @@
 import { access } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { getCredentials } from "../credentials.js";
+import { getCredentials } from "../lib/credentials.js";
 import { getEnvConfig, primeEnv } from "../lib/env.js";
 import { logger } from "../log/logger.js";
 

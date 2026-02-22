@@ -1,12 +1,12 @@
-export { default as Product } from "./Product.js";
-export * from "./credentials.js";
-export * from "./rest.js";
-export * from "./transaction_summary.js";
-export * from "./service/order.js";
+export { default as Product } from "./lib/Product.js";
+export * from "./lib/credentials.js";
+export * from "./lib/rest.js";
+export * from "./lib/transaction_summary.js";
+export * from "./lib/order.js";
 export * from "./lib/cache.js";
 export { default as delay } from "./lib/delay.js";
 export * from "./lib/env.js";
-export * from "./lib/error.js";
+export * from "./log/error.js";
 export * from "./lib/increment.js";
 export * from "./lib/signing.js";
 export * from "./log/logger.js";

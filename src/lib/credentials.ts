@@ -1,7 +1,7 @@
 import { promises } from "node:fs";
-import { getEnvConfig } from "./lib/env.js";
-import { type Credentials, CredentialsSchema } from "./schemas/credentials.js";
-import { logger } from "./log/logger.js";
+import { getEnvConfig } from "./env.js";
+import { type Credentials, CredentialsSchema } from "../schemas/credentials.js";
+import { logger } from "../log/logger.js";
 
 let credentials: Credentials | null = null;
 

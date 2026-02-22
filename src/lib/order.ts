@@ -1,5 +1,5 @@
 import * as uuid from "uuid";
-import { requestOrderCreation } from "../rest.js";
+import { requestOrderCreation } from "./rest.js";
 import { ORDER_SIDE, type OrderSide } from "../schemas/enums.js";
 import type { OrderRequest } from "../schemas/rest.js";
 import { logger } from "../log/logger.js";

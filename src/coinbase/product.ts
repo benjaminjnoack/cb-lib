@@ -3,12 +3,9 @@ import { loadProductFromCache, saveProductToCache } from "./cache.js";
 import { type CoinbaseProduct } from "./schemas/rest.js";
 import { printError } from "../log/error.js";
 import { logger } from "../log/logger.js";
-import { ProductIdSchema } from "../schemas/primitives.js";
+import { type ProductId, ProductIdSchema } from "../schemas/primitives.js";
 
-/**
- * Convert product ('btc') to product ID ('BTC-USD')
- */
-export function getProductId(product: string, currency: string = "USD"): string {
+export function getProductId(product: string, currency: string = "USD"): ProductId {
   let productId = product.toUpperCase();
   if (!productId.includes("-")) {productId = `${productId}-${currency}`;}
   return ProductIdSchema.parse(productId);

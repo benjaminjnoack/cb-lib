@@ -15,5 +15,6 @@ export const Percent = NumericString.refine((value) => {
 export const ProductIdSchema = z.string().regex(/^[A-Z]+-USD$/, {
   message: "Product must be uppercase letters followed by -USD (e.g. BTC-USD).",
 });
+export type ProductId = z.infer<typeof ProductIdSchema>;
 
 export const OrderIdSchema = z.uuid();

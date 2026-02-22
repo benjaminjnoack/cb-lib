@@ -11,12 +11,12 @@ import { type CoinbaseOrder, CoinbaseOrderSchema } from "../schemas/orders.js";
 const paths = envPaths("helper");
 export const cacheDir = paths.cache;
 mkdirSync(cacheDir, { recursive: true });
-const coinbaseDir = path.join(cacheDir, "coinbase");
+export const coinbaseDir = path.join(cacheDir, "coinbase");
 mkdirSync(coinbaseDir, { recursive: true });
-const productsDir = path.join(coinbaseDir, "products");
-mkdirSync(productsDir, { recursive: true });
-const ordersDir = path.join(coinbaseDir, "orders");
-mkdirSync(ordersDir, { recursive: true });
+export const coinbaseProductsDir = path.join(coinbaseDir, "products");
+mkdirSync(coinbaseProductsDir, { recursive: true });
+export const coinbaseOrdersDir = path.join(coinbaseDir, "orders");
+mkdirSync(coinbaseOrdersDir, { recursive: true });
 
 export function loadJsonFromCache(cachePath: string): unknown {
   if (existsSync(cachePath)) {
@@ -47,7 +47,7 @@ export function saveCoinbaseToCache(
 }
 
 export function loadProductFromCache(productId: string): CoinbaseProduct {
-  const cachePath = path.join(productsDir, `${productId}.json`);
+  const cachePath = path.join(coinbaseProductsDir, `${productId}.json`);
   const cache = loadJsonFromCache(cachePath);
   if (!cache) {
     throw new Error(`Cannot find product ${productId}`);
@@ -56,12 +56,12 @@ export function loadProductFromCache(productId: string): CoinbaseProduct {
 }
 
 export function saveProductToCache(productId: string, data: object): void {
-  const cachePath = path.join(productsDir, `${productId}.json`);
+  const cachePath = path.join(coinbaseProductsDir, `${productId}.json`);
   return saveJsonToCache(cachePath, data);
 }
 
 export function loadOrderFromCache(orderId: string): CoinbaseOrder {
-  const cachePath = path.join(ordersDir, `${orderId}.json`);
+  const cachePath = path.join(coinbaseOrdersDir, `${orderId}.json`);
   const cache = loadJsonFromCache(cachePath);
   if (!cache) {
     throw new Error(`Cannot find order ${orderId}`);
@@ -70,7 +70,7 @@ export function loadOrderFromCache(orderId: string): CoinbaseOrder {
 }
 
 export function saveOrderToCache(orderId: string, data: object): void {
-  const cachePath = path.join(ordersDir, `${orderId}.json`);
+  const cachePath = path.join(coinbaseOrdersDir, `${orderId}.json`);
   return saveJsonToCache(cachePath, data);
 }
 

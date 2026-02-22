@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { NumericString } from "./primitives.js";
+import { NumericString } from "../../schemas/primitives.js";
 import { ORDER_TYPES, OrderSideSchema } from "./enums.js";
 
 export const LimitOrderConfigurationSchema = z

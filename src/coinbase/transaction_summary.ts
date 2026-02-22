@@ -1,6 +1,6 @@
 import { requestTransactionSummary } from "./rest.js";
 import { loadCoinbaseFromCache, saveCoinbaseToCache } from "./cache.js";
-import { type TransactionSummary, TransactionSummaryResponseSchema } from "../schemas/rest.js";
+import { type TransactionSummary, TransactionSummaryResponseSchema } from "./schemas/rest.js";
 import { logger } from "../log/logger.js";
 
 let TRANSACTION_SUMMARY: TransactionSummary | null = null;

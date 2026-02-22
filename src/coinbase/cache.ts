@@ -1,8 +1,8 @@
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import { cacheDir, loadJsonFromCache, saveJsonToCache } from "../common/cache.js";
-import { type CoinbaseProduct, CoinbaseProductSchema } from "../schemas/rest.js";
-import { type CoinbaseOrder, CoinbaseOrderSchema } from "../schemas/orders.js";
+import { type CoinbaseProduct, CoinbaseProductSchema } from "./schemas/rest.js";
+import { type CoinbaseOrder, CoinbaseOrderSchema } from "./schemas/orders.js";
 
 export const coinbaseDir = path.join(cacheDir, "coinbase");
 mkdirSync(coinbaseDir, { recursive: true });

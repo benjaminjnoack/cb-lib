@@ -1,6 +1,6 @@
 import { requestProduct } from "./rest.js";
 import { loadProductFromCache, saveProductToCache } from "./cache.js";
-import { type CoinbaseProduct } from "../schemas/rest.js";
+import { type CoinbaseProduct } from "./schemas/rest.js";
 import { printError } from "../log/error.js";
 import { logger } from "../log/logger.js";
 

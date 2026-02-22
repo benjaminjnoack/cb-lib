@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { requestOrders } from "../coinbase/rest.js";
-import { ORDER_STATUS, OrderPlacementSource } from "../schemas/enums.js";
+import { ORDER_STATUS, OrderPlacementSource } from "../coinbase/schemas/enums.js";
 
 /**
  * Start of the year I opened my coinbase account

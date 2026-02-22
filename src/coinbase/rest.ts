@@ -5,11 +5,11 @@ import axios, {
   type AxiosRequestConfig,
   type Method,
 } from "axios";
-import { ORDER_STATUS } from "../schemas/enums.js";
+import { ORDER_STATUS } from "./schemas/enums.js";
 import { toIncrement } from "../common/increment.js";
 import { z, type ZodType } from "zod";
 import delay from "../common/delay.js";
-import { type CoinbaseOrder } from "../schemas/orders.js"
+import { type CoinbaseOrder } from "./schemas/orders.js"
 import {
   AccountsResponseSchema,
   BestBidAskResponseSchema,
@@ -26,7 +26,7 @@ import {
   TickerResponseSchema,
   type TransactionSummary,
   TransactionSummaryResponseSchema,
-} from "../schemas/rest.js";
+} from "./schemas/rest.js";
 import { logger } from "../log/logger.js";
 
 const HOST = "https://api.coinbase.com";

@@ -11,11 +11,11 @@ export * from "./common/increment.js";
 export * from "./coinbase/signing.js";
 export * from "./log/logger.js";
 export * from "./log/orders.js";
-export * from "./schemas/credentials.js";
-export * from "./schemas/env.js";
-export * from "./schemas/enums.js";
-export * from "./schemas/logger.js";
-export * from "./schemas/orders.js";
+export * from "./coinbase/schemas/credentials.js";
+export * from "./common/schemas/env.js";
+export * from "./coinbase/schemas/enums.js";
+export * from "./log/schemas/logger.js";
+export * from "./coinbase/schemas/orders.js";
 export * from "./schemas/primitives.js";
-export * from "./schemas/rest.js";
+export * from "./coinbase/schemas/rest.js";
 export * from "./coinbase/cache.js"

@@ -1,6 +1,6 @@
 {
   "name": "cb-lib",
-  "version": "3.3.2",
+  "version": "4.0.0",
   "author": "Ben Noack",
   "description": "Coinbase Library",
   "license": "Apache-2.0",

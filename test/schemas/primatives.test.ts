@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { expectSchemaAccepts, expectSchemaRejects } from "../helpers/schema.js";
-import { NumericString, OrderIdSchema, Percent, PositiveNumericString, ProductSchema } from "../../src/index.js";
+import { NumericString, OrderIdSchema, Percent, PositiveNumericString, ProductIdSchema } from "../../src/index.js";
 
 function toFiniteNumber(value: string): number {
   const num = Number(value);
@@ -135,38 +135,25 @@ describe("Percent", () => {
   });
 });
 
-describe("ProductSchema", () => {
-  it("accepts and normalizes token/product strings", () => {
-    const cases: Array<{ input: unknown; output: string }> = [
-      { input: "btc", output: "BTC-USD" },
-      { input: "BTC", output: "BTC-USD" },
-      { input: "btc-usd", output: "BTC-USD" },
-      { input: "BTC-USD", output: "BTC-USD" },
-      { input: " eth ", output: "ETH-USD" },
-      { input: " SOL-USD ", output: "SOL-USD" },
-      { input: "AAVE", output: "AAVE-USD" },
-      { input: "1INCH", output: "1INCH-USD" },
-      { input: undefined, output: "BTC-USD" },
-    ];
-
-    for (const { input, output } of cases) {
-      const parsed = ProductSchema.safeParse(input);
-      expect(parsed.success).toBe(true);
-      if (parsed.success) {
-        expect(parsed.data).toBe(output);
-      }
-    }
+describe("ProductIdSchema", () => {
+  it("accepts only preformatted uppercase product ids ending in -USD", () => {
+    const valid = ["BTC-USD", "ETH-USD", "SOL-USD", "AAVE-USD"];
+    expectSchemaAccepts(ProductIdSchema, valid, (parsedValue, input) => {
+      expect(parsedValue).toBe(input);
+    });
   });
 
   it("rejects malformed product values and non-strings", () => {
-    const commonInvalidForProduct = commonInvalidValues.filter((v) => v !== undefined);
     const invalid: unknown[] = [
-      ...commonInvalidForProduct,
+      ...commonInvalidValues,
       "",
       " ",
       "\t",
       "\n",
+      "btc-usd",
+      "Btc-USD",
       "-USD",
+      "BTC",
       "BTC-",
       "BTC- EUR",
       "BTC-USDT",
@@ -176,6 +163,7 @@ describe("ProductSchema", () => {
       "BTC USD",
       "BTC--USD",
       "B.T.C",
+      "1INCH-USD",
       "💰",
       "BTC💰",
       "ＢＴＣ",
@@ -187,7 +175,7 @@ describe("ProductSchema", () => {
       "BTC\u0000USD",
     ];
 
-    expectSchemaRejects(ProductSchema, invalid);
+    expectSchemaRejects(ProductIdSchema, invalid);
   });
 });
 

@@ -1,5 +1,5 @@
 import { requestTransactionSummary } from "./rest.js";
-import { loadCoinbase, saveCoinbase } from "./lib/cache.js";
+import { loadCoinbaseFromCache, saveCoinbaseToCache } from "./lib/cache.js";
 import { type TransactionSummary, TransactionSummaryResponseSchema } from "./schemas/rest.js";
 import { logger } from "./log/logger.js";
 
@@ -9,7 +9,7 @@ export async function getTransactionSummary(): Promise<TransactionSummary> {
   if (TRANSACTION_SUMMARY) {
     logger.debug("getTransactionSummary => cached in memory");
   } else {
-    const cached = loadCoinbase("transaction_summary");
+    const cached = loadCoinbaseFromCache("transaction_summary");
 
     if (cached) {
       try {
@@ -25,7 +25,7 @@ export async function getTransactionSummary(): Promise<TransactionSummary> {
 
     if (!TRANSACTION_SUMMARY) {
       TRANSACTION_SUMMARY = await requestTransactionSummary();
-      await saveCoinbase("transaction_summary", TRANSACTION_SUMMARY);
+      saveCoinbaseToCache("transaction_summary", TRANSACTION_SUMMARY);
     }
   }
 

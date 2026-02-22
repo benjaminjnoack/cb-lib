@@ -1,5 +1,5 @@
 import { requestProduct } from "./rest.js";
-import { loadProduct, saveProduct } from "./lib/cache.js";
+import { loadProductFromCache, saveProductToCache } from "./lib/cache.js";
 import { type CoinbaseProduct } from "./schemas/rest.js";
 import { printError } from "./lib/error.js";
 import { logger } from "./log/logger.js";
@@ -40,16 +40,16 @@ class Product {
     if (forceUpdate) {
       logger.info(`getProductInfo => Force update for ${productId}`);
       data = await requestProduct(productId);
-      saveProduct(productId, data);
+      saveProductToCache(productId, data);
     } else {
       try {
-        data = loadProduct(productId);
+        data = loadProductFromCache(productId);
         logger.debug(`getProductInfo => Cache hit for ${productId}`);
       } catch (e) {
         printError(e);
         logger.warn(`getProductInfo => Cache miss for ${productId}, fetching from Coinbase...`);
         data = await requestProduct(productId);
-        saveProduct(productId, data);
+        saveProductToCache(productId, data);
       }
     }
     return data;

@@ -1,4 +1,4 @@
-export * from "./coinbase/Product.js";
+export * from "./coinbase/product.js";
 export * from "./coinbase/credentials.js";
 export * from "./coinbase/rest.js";
 export * from "./coinbase/transaction_summary.js";

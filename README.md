@@ -116,7 +116,7 @@ There is no default export.
 - Cache and signing helpers (`src/lib/cache.ts`, `src/lib/signing.ts`)
 - Credentials loading helper (`src/credentials.ts`)
 - Logging helpers (`src/log/logger.ts`, `src/log/orders.ts`)
-- Product helpers (`src/Product.ts`)
+- Product helpers (`src/product.ts`)
 - Transaction summary caching helper (`src/transaction_summary.ts`)
 - Zod schemas for runtime validation (`src/schemas/`)
 
